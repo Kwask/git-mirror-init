@@ -9,7 +9,7 @@ create_gitlab_repo () {
         https://gitlab.com/api/v4/projects?private_token=$token -d \
         "{\"name\":\"$repo\"}")
 
-    echo $response | jq > 'gitlab_resp.json'
+    #echo $response | jq > 'gitlab_resp.json'
     echo $response | jq -r ".ssh_url_to_repo"
 }
 
@@ -22,7 +22,7 @@ create_github_repo () {
         https://api.github.com/user/repos -d \
         "{\"name\":\"$repo\"}")
 
-    echo $response | jq > "github_resp.json"
+    #echo $response | jq > "github_resp.json"
     echo $response | jq -r ".ssh_url"
 }
 
@@ -45,5 +45,6 @@ else
     git init
     git remote add origin $url_gl
     git remote set-url --add --push origin $url_gh
+    git remote set-url --add --push origin $url_gl
 fi
 
